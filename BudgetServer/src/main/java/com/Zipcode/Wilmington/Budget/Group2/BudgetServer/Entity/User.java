@@ -12,8 +12,7 @@ public class User {
 
     private String name;
 
-    //TODO - figure out joins
-    private List<Account> userAccounts;
+//git
 
     public User() {
     }
