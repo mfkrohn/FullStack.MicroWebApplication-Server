@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class UserController {
 
-   private UserService userService;
-
     @Autowired
+    private UserService userService;
+
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -29,7 +29,7 @@ public class UserController {
 
     @PutMapping("/users/{userId}")
     public ResponseEntity<User> update(@PathVariable Integer userId, @RequestBody User user){
-        return new ResponseEntity<>(userService.updateName(userId, user), HttpStatus.OK);
+        return new ResponseEntity<>(userService.updateName(user, userId), HttpStatus.OK);
     }
 
     @DeleteMapping("/users/{userId}")
