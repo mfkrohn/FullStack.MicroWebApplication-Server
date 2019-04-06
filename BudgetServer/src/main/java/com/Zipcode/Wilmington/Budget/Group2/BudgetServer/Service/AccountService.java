@@ -62,8 +62,9 @@ public class AccountService {
 
     }
 
-    public void delete(Integer accountID){
+    public Boolean delete(Integer accountID){
         accountRepo.deleteAccountById(accountID);
+        return true;
     }
 
 
