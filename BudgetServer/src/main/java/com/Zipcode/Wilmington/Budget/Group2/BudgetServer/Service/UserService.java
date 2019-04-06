@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class UserService {
-
-
     UserRepo userRepo;
 
     @Autowired
@@ -23,17 +21,17 @@ public class UserService {
     }
 
     public User getAccount(Integer userID){
-
-        return null;
+        return userRepo.findById(userID).get();
     }
 
-    public User updateName(User user, Integer id){
-
-        return user;
+    public User updateName(User user, Integer userID){
+        User originalUser = userRepo.findById(userID).get();
+        originalUser.setName(user.getName());
+        return userRepo.save(originalUser);
     }
 
     public Boolean deleteUser(Integer userID){
-
-        return null;
+        userRepo.deleteById(userID);
+        return true;
     }
 }
