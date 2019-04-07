@@ -1,8 +1,10 @@
 package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Controller;
 
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Account;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Exceptions.NoSuchEntityException;
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,23 +17,23 @@ public class AccountController {
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
     }
+
     @PostMapping("/accounts/")
     public ResponseEntity<Account> create(@RequestBody Account account){
 
-        return null;
+        return new ResponseEntity<>(accountService.create(account), HttpStatus.CREATED);
     }
 
     @GetMapping("/accounts/{accountId}")
-    public ResponseEntity<Account> read(@PathVariable Integer accountId){
+    public ResponseEntity<Account> read(@PathVariable Integer accountId) throws NoSuchEntityException {
 
-        return null;
+        return new ResponseEntity<>(accountService.getAccount(accountId), HttpStatus.OK);
     }
 
     @PutMapping("/accounts/{accountId}")
-    public  ResponseEntity<Account> update(@PathVariable Integer accountId, @RequestBody Account account){
+    public  ResponseEntity<Account> update(@PathVariable Integer accountId, @RequestBody Account account) throws NoSuchEntityException {
 
-        return null;
-    }
+        return new ResponseEntity<>(accountService.update(accountId, account), HttpStatus.OK);    }
 
     @PutMapping("/accounts/withdraw/{accountId}/{amount}")
     public ResponseEntity<Account> withdraw(@PathVariable Integer accountId,@PathVariable Double amount,@RequestBody Account account){
