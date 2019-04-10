@@ -44,20 +44,19 @@ public class AccountController {
 
 
     @PutMapping("/accounts/deposit/{accountId}/{amount}")
-    public ResponseEntity<Account> deposit(@PathVariable Integer accountId, @PathVariable Double amount, @RequestBody Account account) throws NoSuchEntityException {
-
-        return new ResponseEntity<>(accountService.withdraw(accountId, amount), HttpStatus.OK);
+    public ResponseEntity<Account> deposit(@PathVariable Integer accountId,@PathVariable Double amount){
+        accountService.deposit(accountId,amount);
+        return new ResponseEntity<>(accountService.getAccount(accountId),HttpStatus.OK);
     }
 
     @PutMapping("/accounts/transfer/{account1Id}/{account2Id}/{amount}")
-    public ResponseEntity<Account> transfer(@PathVariable Integer account1Id, @PathVariable Integer account2Id, @PathVariable Double amount, @RequestBody Account account1, @RequestBody Account account2) throws NoSuchEntityException {
-            return null;
-//        return new ResponseEntity<>(accountService.transfer(account1Id, account2Id, amount), HttpStatus.OK);
+    public ResponseEntity<Account[]> transfer(@PathVariable Integer account1Id, @PathVariable Integer account2Id, @PathVariable Double amount){
+        return new ResponseEntity<>(accountService.transfer(account1Id,account2Id,amount),HttpStatus.OK);
+
     }
 
     @DeleteMapping("/accounts/{accountId}")
-    public ResponseEntity<Boolean> delete(@PathVariable Integer accountId) {
-
-        return new ResponseEntity<>(accountService.delete(accountId), HttpStatus.OK);
+    public ResponseEntity<Boolean> delete(@PathVariable Integer accountId){
+        return new ResponseEntity<>(accountService.delete(accountId),HttpStatus.OK);
     }
 }
