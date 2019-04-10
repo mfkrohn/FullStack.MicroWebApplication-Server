@@ -1,5 +1,7 @@
 package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,7 +14,9 @@ public class User {
 
     private String name;
 
-//git
+    @OneToMany(mappedBy = "userID", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Account> accounts;
 
     public User() {
     }
@@ -27,5 +31,13 @@ public class User {
 
     public Integer getId() {
         return id;
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 }

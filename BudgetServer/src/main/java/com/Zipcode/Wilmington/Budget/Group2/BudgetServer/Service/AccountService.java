@@ -1,7 +1,6 @@
 package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Service;
 
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Account;
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Exceptions.NoSuchEntityException;
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Repositories.AccountRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,49 +20,48 @@ public class AccountService {
         return accountRepo.save(account);
     }
 
-    public Account getAccount(Integer accountID) throws NoSuchEntityException {
-        if(accountRepo.getOne(accountID)!=null) {
-        return accountRepo.getOne(accountID);
-        }
-        else{
-            throw new NoSuchEntityException("Account: " + accountID + "does not exist.");
-        }
+    public Account getAccount(Integer accountID) {
+
+        return accountRepo.findById(accountID).get();
+
     }
 
-    public Account update(Integer accountID,Account newAccountData) throws NoSuchEntityException {
-        Account account = getAccount(accountID);
+    public Account update(Integer accountID,Account newAccountData) {
+        Account account = accountRepo.findById(accountID).get();
         account.setBalance(newAccountData.getBalance());
         account.setUserID(newAccountData.getUserID());
 
-        return account;
+        return accountRepo.save(account);
     }
 
-    public Account withdraw(Integer accountID, Double amount) throws NoSuchEntityException {
-        Account account = getAccount(accountID);
+    public Account withdraw(Integer accountID, Double amount) {
+        Account account = accountRepo.findById(accountID).get();
         if(amount > 0 && amount <= account.getBalance()) {
             account.setBalance(account.getBalance() - amount);
         }
-        return account;
+        return accountRepo.save(account);
     }
 
-    public Account deposit(Integer accountID, Double amount) throws NoSuchEntityException {
-        Account account = getAccount(accountID);
+    public Account deposit(Integer accountID, Double amount) {
+        Account account = accountRepo.findById(accountID).get();
         if(amount > 0){
             account.setBalance(account.getBalance() + amount);
         }
-        return account;
+        return accountRepo.save(account);
     }
 
-    public void transfer(Integer accountIdFrom, Integer accountIdTo, Double amount) throws NoSuchEntityException {
+    public Account[] transfer(Integer accountIdFrom, Integer accountIdTo, Double amount){
         if(amount > 0){
-        withdraw(accountIdFrom,amount);
-        deposit(accountIdTo,amount);
+            Account[] accounts = new Account[2];
+        accounts[0] = withdraw(accountIdFrom,amount);
+        accounts[1] = deposit(accountIdTo,amount);
+        return accounts;
         }
-
+        return null;
     }
 
     public Boolean delete(Integer accountID){
-        accountRepo.deleteAccountById(accountID);
+        accountRepo.deleteById(accountID);
         return true;
     }
 

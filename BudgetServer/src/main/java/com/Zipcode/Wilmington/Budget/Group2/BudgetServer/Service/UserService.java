@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 @Service
 public class UserService {
     UserRepo userRepo;
@@ -22,6 +24,10 @@ public class UserService {
 
     public User getAccount(Integer userID){
         return userRepo.findById(userID).get();
+    }
+
+    public List<Account> getAccounts(Integer userId){
+        return userRepo.findById(userId).get().getAccounts();
     }
 
     public User updateName(User user, Integer userID){
