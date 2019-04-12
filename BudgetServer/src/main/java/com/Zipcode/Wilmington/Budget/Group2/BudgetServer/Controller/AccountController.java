@@ -19,7 +19,7 @@ public class AccountController {
     @PostMapping("/accounts")
     public ResponseEntity<Account> create(@RequestBody Account account){
 
-        return new ResponseEntity<Account>(accountService.create(account), HttpStatus.CREATED);
+        return new ResponseEntity<>(accountService.create(account), HttpStatus.CREATED);
     }
 
     @GetMapping("/accounts/{accountId}")
@@ -33,7 +33,7 @@ public class AccountController {
     }
 
     @PutMapping("/accounts/withdraw/{accountId}/{amount}")
-    public ResponseEntity<Account> withdraw(@PathVariable Integer accountId,@PathVariable Double amount,@RequestBody Account account){
+    public ResponseEntity<Account> withdraw(@PathVariable Integer accountId,@PathVariable Double amount){
         accountService.withdraw(accountId,amount);
         return new ResponseEntity<>(accountService.getAccount(accountId),HttpStatus.OK);
     }

@@ -51,7 +51,9 @@ public class AccountService {
     }
 
     public Account[] transfer(Integer accountIdFrom, Integer accountIdTo, Double amount){
-        if(amount > 0){
+        if(amount > 0 &&
+                accountRepo.findById(accountIdFrom).get().getUserID()
+                        .equals(accountRepo.findById(accountIdTo).get().getUserID())){
             Account[] accounts = new Account[2];
         accounts[0] = withdraw(accountIdFrom,amount);
         accounts[1] = deposit(accountIdTo,amount);
