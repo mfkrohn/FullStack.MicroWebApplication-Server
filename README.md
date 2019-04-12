@@ -81,3 +81,6 @@
 	* deposit money to each account
 	* withdrawl money from each account
 	* transfer money to and from any 2 accounts
+
+# Postman Scripts Doc
+https://docs.google.com/document/d/1CQ8NINu07sePFhXfYKKTqZI1UCLoJC4LVuOwJMFjfRE/edit?usp=sharing
