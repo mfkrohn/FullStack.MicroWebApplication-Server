@@ -1,1 +1,1 @@
-web: java -jar /Users/michaelkrohn/FinalProject/FullStack.MicroWebApplication-Server/FullStack.MicroWebApplication-Server/BudgetServer/target/BudgetServer-0.0.1-SNAPSHOT.jar
+web: java -jar target/BudgetServer-0.0.1-SNAPSHOT.jar
