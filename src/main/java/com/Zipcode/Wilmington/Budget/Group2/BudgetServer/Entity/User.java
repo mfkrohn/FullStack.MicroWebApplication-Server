@@ -3,6 +3,7 @@ package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Entity
@@ -19,6 +20,11 @@ public class User {
     private List<Account> accounts;
 
     public User() {
+    }
+
+    public User(Integer id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public String getName() {

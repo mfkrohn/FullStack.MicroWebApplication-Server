@@ -18,11 +18,11 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
-    public User create(@RequestBody User user){
+    public User create(User user){
         return userRepo.save(user);
     }
 
-    public User getAccount(Integer userID){
+    public User getUser(Integer userID){
         return userRepo.findById(userID).get();
     }
 
