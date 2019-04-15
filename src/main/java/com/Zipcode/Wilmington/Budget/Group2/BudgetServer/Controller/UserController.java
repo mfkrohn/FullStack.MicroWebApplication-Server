@@ -27,7 +27,7 @@ public class UserController {
 
     @GetMapping("/users/{userId}")
     public ResponseEntity<User> show(@PathVariable Integer userId){
-        return new ResponseEntity<>(userService.getAccount(userId), HttpStatus.OK);
+        return new ResponseEntity<>(userService.getUser(userId), HttpStatus.OK);
     }
 
     @GetMapping("users/{userId}/accounts")
