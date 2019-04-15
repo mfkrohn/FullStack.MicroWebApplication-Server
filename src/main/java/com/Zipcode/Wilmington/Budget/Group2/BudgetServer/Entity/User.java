@@ -3,7 +3,6 @@ package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Entity
