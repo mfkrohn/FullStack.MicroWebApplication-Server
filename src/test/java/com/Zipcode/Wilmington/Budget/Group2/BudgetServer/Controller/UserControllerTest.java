@@ -1,5 +1,6 @@
 package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Controller;
 
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Account;
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.User;
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Repositories.UserRepo;
 import org.junit.Test;
@@ -15,6 +16,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -58,5 +61,19 @@ public class UserControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.content().string(expectedContent));
     }
+
+    /*@Test
+    public void testGetAccounts() throws Exception {
+        User user = new User(1, "Davis");
+        Account account = new Account(1, 5.0);
+        List<Account> accountList = new ArrayList<>();
+        accountList.add(account);
+        user.setAccounts(accountList);
+
+        BDDMockito
+                .given(repo.findById(1))
+                .willReturn(Optional.(user.getAccounts().get(0)));
+    }*/
+    //I have not figure out the above code yet
 }
 
