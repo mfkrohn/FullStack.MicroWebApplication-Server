@@ -35,10 +35,10 @@ public class UserController {
         return new ResponseEntity<>(userService.getAccounts(userId),HttpStatus.OK);
     }
 
-//    @PutMapping("/users/{userId}")
-//    public ResponseEntity<User> update(@PathVariable Integer userId, @RequestBody User user){
-//        return new ResponseEntity<>(userService.updateName(user, userId), HttpStatus.OK);
-//    }
+    @PutMapping("/users/{userId}")
+    public ResponseEntity<User> update(@PathVariable Integer userId, @RequestBody User user){
+        return new ResponseEntity<>(userService.updateName(user, userId), HttpStatus.OK);
+    }
 
     @DeleteMapping("/users/{userId}")
     public ResponseEntity<Boolean> delete(@PathVariable Integer userId){

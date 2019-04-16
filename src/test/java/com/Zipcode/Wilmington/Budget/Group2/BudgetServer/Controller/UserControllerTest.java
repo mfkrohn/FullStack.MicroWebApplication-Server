@@ -35,9 +35,11 @@ public class UserControllerTest {
                 .given(repo.findById(givenId))
                 .willReturn(Optional.of(new User(givenId, "Davis")));
 
+        String expectedContent = "{\"id\":1,\"name\":\"Davis\"}";
         this.mockMvc.perform(MockMvcRequestBuilders
                 .get("/users/" + givenId))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string(expectedContent));
     }
 
     @Test
@@ -47,7 +49,7 @@ public class UserControllerTest {
                 .given(repo.save(user))
                 .willReturn(user);
 
-        String expectedContent = "{\"id\":\"1\",\"name\":\"Davis\"}";
+        String expectedContent = "{\"id\":1,\"name\":\"Davis\"}";
         this.mockMvc.perform(MockMvcRequestBuilders
                 .post("/users/")
                 .content(expectedContent)
