@@ -53,9 +53,8 @@ public class UserControllerTest {
                 .content(expectedContent)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isCreated());
-                //.andExpect(MockMvcResultMatchers.content().string(expectedContent));
-
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.content().string(expectedContent));
     }
 }
 
