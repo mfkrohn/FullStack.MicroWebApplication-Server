@@ -30,11 +30,11 @@ public class UserService {
         return userRepo.findById(userId).get().getAccounts();
     }
 
-    public User updateName(User user, Integer userID){
-        User originalUser = userRepo.findById(userID).get();
-        originalUser.setName(user.getName());
-        return userRepo.save(originalUser);
-    }
+//    public User updateName(User user, Integer userID){
+//        User originalUser = userRepo.findById(userID).get();
+//        originalUser.setName(user.getName());
+//        return userRepo.save(originalUser);
+//    }
 
     public Boolean deleteUser(Integer userID){
         userRepo.deleteById(userID);
