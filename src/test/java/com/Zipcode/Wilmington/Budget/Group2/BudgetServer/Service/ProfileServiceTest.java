@@ -1,9 +1,9 @@
 package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Service;
 
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.BudgetServerApplication;
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Controller.UserController;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Controller.ProfileController;
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Account;
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.User;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Profile;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,62 +23,62 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = BudgetServerApplication.class)
 @TestPropertySource(locations="classpath:application.properties")
-public class UserServiceTest {
+public class ProfileServiceTest {
 
     @MockBean
-    private UserService service;
+    private ProfileService service;
 
-    private UserController controller;
+    private ProfileController controller;
 
     @Before
     public void setUp() {
-        this.controller = new UserController(service);
+        this.controller = new ProfileController(service);
     }
 
     @Test
     public void testCreate() {
         //Given
         HttpStatus expected = HttpStatus.CREATED;
-        User expectedUser = new User();
+        Profile expectedProfile = new Profile();
         BDDMockito
-                .given(service.create(expectedUser))
-                .willReturn(expectedUser);
+                .given(service.create(expectedProfile))
+                .willReturn(expectedProfile);
 
         //When
-        ResponseEntity<User> response = controller.create(expectedUser);
+        ResponseEntity<Profile> response = controller.create(expectedProfile);
         HttpStatus actual = response.getStatusCode();
-        User actualUser = response.getBody();
+        Profile actualProfile = response.getBody();
 
         //Then
         Assert.assertEquals(expected, actual);
-        Assert.assertEquals(expectedUser, actualUser);
+        Assert.assertEquals(expectedProfile, actualProfile);
     }
 
     @Test
-    public void testGetUser() {
+    public void testGetProfile() {
         //Given
         HttpStatus expected = HttpStatus.OK;
-        User expectedUser = new User(1, "Davis");
+        Profile expectedProfile = new Profile(1, "Davis");
         BDDMockito
                 .given(service.getUser(1))
-                .willReturn(expectedUser);
+                .willReturn(expectedProfile);
 
         // When
-        ResponseEntity<User> response = controller.show(1);
+        ResponseEntity<Profile> response = controller.show(1);
         HttpStatus actual = response.getStatusCode();
-        User actualUser = response.getBody();
+        Profile actualProfile = response.getBody();
 
         // Then
         Assert.assertEquals(expected, actual);
-        Assert.assertEquals(expectedUser, actualUser);
+        Assert.assertEquals(expectedProfile, actualProfile);
     }
 
     //Given
     @Test
-    public void testDeleteUser() {
+    public void testDeleteProfile() {
         //Given
         HttpStatus expected = HttpStatus.OK;
-        User expectedUser = new User(1, "Davis");
+        Profile expectedProfile = new Profile(1, "Davis");
         BDDMockito
                 .given(service.deleteUser(1))
                 .willReturn(true);

@@ -1,13 +1,15 @@
 package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class User {
+@Data
+public class Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,45 +17,25 @@ public class User {
 
     private String name;
 
-    @OneToMany(mappedBy = "userID", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "profileID", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Account> accounts;
 
-    public User() {
+    public Profile() {
     }
 
-    public User(Integer id, String name) {
+    public Profile(Integer id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public List<Account> getAccounts() {
-        return accounts;
-    }
-
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) &&
-                Objects.equals(name, user.name);
+        Profile profile = (Profile) o;
+        return Objects.equals(id, profile.id) &&
+                Objects.equals(name, profile.name);
     }
 
     @Override

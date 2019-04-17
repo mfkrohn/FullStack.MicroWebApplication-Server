@@ -16,7 +16,7 @@ public class Account {
     private Integer id;
 
     @NotNull
-    private Integer userID;
+    private Integer profileID;
 
     @NotNull
     private Double balance;
@@ -24,8 +24,8 @@ public class Account {
     public Account() {
     }
 
-    public Account(@NotNull Integer userID, @NotNull Double balance) {
-        this.userID = userID;
+    public Account(@NotNull Integer profileID, @NotNull Double balance) {
+        this.profileID = profileID;
         this.balance = balance;
     }
 
@@ -34,12 +34,12 @@ public class Account {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return Objects.equals(userID, account.userID) &&
+        return Objects.equals(profileID, account.profileID) &&
                 Objects.equals(balance, account.balance);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userID, balance);
+        return Objects.hash(profileID, balance);
     }
 }

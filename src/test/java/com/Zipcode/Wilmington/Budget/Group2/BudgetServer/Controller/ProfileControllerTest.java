@@ -1,10 +1,10 @@
 package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Controller;
 
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Account;
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.User;
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Repositories.UserRepo;
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Service.UserService;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Service.ProfileService;
 import org.junit.Before;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Profile;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Repositories.ProfileRepo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
@@ -26,20 +26,20 @@ import java.util.Optional;
 @SpringBootTest
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
-public class UserControllerTest {
+public class ProfileControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private UserRepo repo;
+    private ProfileRepo repo;
 
     @MockBean
-    private UserService service;
+    private ProfileService service;
 
     @Before
-    public void setUp() throws Exception {
-        service = new UserService(repo);
+    public void setUp() {
+        service = new ProfileService(repo);
     }
 
     @Test
@@ -47,25 +47,25 @@ public class UserControllerTest {
         Integer givenId = 1;
         BDDMockito
                 .given(repo.findById(givenId))
-                .willReturn(Optional.of(new User(givenId, "Davis")));
+                .willReturn(Optional.of(new Profile(givenId, "Davis")));
 
         String expectedContent = "{\"id\":1,\"name\":\"Davis\"}";
         this.mockMvc.perform(MockMvcRequestBuilders
-                .get("/users/" + givenId))
+                .get("/profiles/" + givenId))
                 .andExpect(MockMvcResultMatchers.status().isOk());
                 //.andExpect(MockMvcResultMatchers.content().string(expectedContent));
     }
 
     @Test
     public void testCreate() throws Exception {
-        User user = new User(1, "Davis");
+        Profile profile = new Profile(1, "Davis");
         BDDMockito
-                .given(repo.save(user))
-                .willReturn(user);
+                .given(repo.save(profile))
+                .willReturn(profile);
 
         String expectedContent = "{\"id\":1,\"name\":\"Davis\"}";
         this.mockMvc.perform(MockMvcRequestBuilders
-                .post("/users/")
+                .post("/profiles/")
                 .content(expectedContent)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON))
@@ -73,12 +73,10 @@ public class UserControllerTest {
                 //.andExpect(MockMvcResultMatchers.content().string(expectedContent));
     }
 
-//    I have not figure out the below code yet
-
     @Test
     public void testDelete() {
-        User user = new User(1, "Davis");
-        Mockito.when(repo.findById(1)).thenReturn(Optional.of(user));
+        Profile profile = new Profile(1, "Davis");
+        Mockito.when(repo.findById(1)).thenReturn(Optional.of(profile));
 
         service.deleteUser(1);
 
@@ -87,12 +85,12 @@ public class UserControllerTest {
 
     @Test
     public void testGetAccounts() {
-        User user = new User(1, "Davis");
+        Profile profile = new Profile(1, "Davis");
         Account account = new Account(1, 5.0);
         List<Account> accountList = new ArrayList<>();
         accountList.add(account);
-        user.setAccounts(accountList);
-        Mockito.when(repo.findById(1)).thenReturn(Optional.of(user));
+        profile.setAccounts(accountList);
+        Mockito.when(repo.findById(1)).thenReturn(Optional.of(profile));
 
         service.getAccounts(1);
 
@@ -101,22 +99,21 @@ public class UserControllerTest {
 
     @Test
     public void testCreateUser() {
-        User user = new User(1, "Davis");
-        Mockito.when(repo.save(user)).thenReturn(user);
+        Profile profile = new Profile(1, "Davis");
+        Mockito.when(repo.save(profile)).thenReturn(profile);
 
-        service.create(user);
+        service.create(profile);
 
-        Mockito.verify(repo, Mockito.times(1)).save(user);
+        Mockito.verify(repo, Mockito.times(1)).save(profile);
     }
 
     @Test
     public void testGetUser() {
-        User user = new User(1, "Davis");
-        Mockito.when(repo.findById(1)).thenReturn(Optional.of(user));
+        Profile profile = new Profile(1, "Davis");
+        Mockito.when(repo.findById(1)).thenReturn(Optional.of(profile));
 
         service.getUser(1);
 
         Mockito.verify(repo, Mockito.times(1)).findById(1);
     }
 }
-
