@@ -86,10 +86,16 @@ public class AccountServiceTest {
     @Test
     public void testWithdraw() {
         HttpStatus expected = HttpStatus.OK;
-        Account withdrawnAccount = new Account(1, 5.0);
+        Account withdrawnAccount = new Account(1, 10.0);
         BDDMockito
                 .given(service.withdraw(1, 5.0))
                 .willReturn(withdrawnAccount);
+
+        BDDMockito
+                .given(service.getAccount(1))
+                .willReturn(withdrawnAccount);
+
+
 
         //When
         ResponseEntity<Account> response = controller.withdraw(1, 5.0);
@@ -104,12 +110,16 @@ public class AccountServiceTest {
     @Test
     public void testDeposit() {
         HttpStatus expected = HttpStatus.OK;
-        Account depositAccount = new Account(1, 10.0);
+        Account depositAccount = new Account(1, 5.0);
         BDDMockito
-                .given(service.withdraw(1, 5.0))
+                .given(service.withdraw(1 ,5.0))
+                .willReturn(depositAccount);
+
+        BDDMockito
+                .given(service.getAccount(1))
                 .willReturn(depositAccount);
         //When
-        ResponseEntity<Account> response = controller.deposit(1, 5.0);
+        ResponseEntity<Account> response = controller.deposit(1,5.0);
         HttpStatus actual = response.getStatusCode();
         Account actualAccount = response.getBody();
 
@@ -121,8 +131,8 @@ public class AccountServiceTest {
     @Test
     public void testTransfer() {
         HttpStatus expected = HttpStatus.OK;
-        Account account1 = new Account(1, 10.0);
-        Account account2 = new Account(2, 10.0);
+        Account account1 = new Account(5, 10.0);
+        Account account2 = new Account(10, 10.0);
         Account[] accounts = {account1, account2};
         BDDMockito
                 .given(service.transfer(1, 2, 5.0))
@@ -135,7 +145,7 @@ public class AccountServiceTest {
 
         //Then
         Assert.assertEquals(expected, actual);
-        Assert.assertEquals(accounts, actualAccounts);
+        Assert.assertArrayEquals(accounts, actualAccounts);
     }
 
     @Test
