@@ -7,17 +7,17 @@ import org.junit.Test;
 
 import javax.persistence.Entity;
 
-public class UserTest {
+public class ProfileTest {
     @Test
     public void testClassSignatureAnnotations() {
-        Assert.assertTrue(User.class.isAnnotationPresent(Entity.class));
+        Assert.assertTrue(Profile.class.isAnnotationPresent(Entity.class));
     }
 
     @Test
     public void testCreateJson() throws JsonProcessingException {
         ObjectMapper jsonWriter = new ObjectMapper();
-        User user = new User();
-        String json = jsonWriter.writeValueAsString(user);
+        Profile profile = new Profile();
+        String json = jsonWriter.writeValueAsString(profile);
     }
 
 }
