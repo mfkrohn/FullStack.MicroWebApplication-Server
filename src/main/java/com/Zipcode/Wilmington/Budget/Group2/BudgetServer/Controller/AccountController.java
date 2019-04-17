@@ -29,7 +29,7 @@ public class AccountController {
 
     @PutMapping("/accounts/{accountId}")
     public  ResponseEntity<Account> update(@PathVariable Integer accountId, @RequestBody Account account){
-            return new ResponseEntity<Account>(accountService.update(accountId,account),HttpStatus.OK);
+            return new ResponseEntity<>(accountService.update(accountId, account), HttpStatus.OK);
     }
 
     @PutMapping("/accounts/withdraw/{accountId}/{amount}")
