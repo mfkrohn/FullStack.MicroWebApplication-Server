@@ -6,6 +6,9 @@ import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Service.UserService;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Optional;
+
 import static org.mockito.Mockito.*;
 
 public class UserServiceTest {
@@ -39,11 +42,15 @@ public class UserServiceTest {
 
         // when
         UserService service = new UserService(mockRepo);
-        service.create(userToUpdate);
-        service.updateName(userToUpdate, expectedId);
+        when(mockRepo.findById(expectedId)).thenReturn(Optional.of(userToUpdate));
+        User user = mockRepo.findById(expectedId).get();
+        user.setName(expectedName);
+
+        System.out.println(user.getName());
+        User actual = service.updateName(user, expectedId);
 
         // then
-        verify(mockRepo).save(userToUpdate);
+        Assert.assertEquals(expectedName, actual.getName());
     }
 
     @Test
