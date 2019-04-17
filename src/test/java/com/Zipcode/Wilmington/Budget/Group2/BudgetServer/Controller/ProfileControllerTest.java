@@ -1,76 +1,116 @@
 package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Controller;
 
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.BudgetServerApplication;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Account;
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Profile;
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Repositories.ProfileRepo;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Service.ProfileService;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
-@SpringBootTest
-@AutoConfigureMockMvc
+
 @RunWith(SpringRunner.class)
+@ContextConfiguration(classes = BudgetServerApplication.class)
+@TestPropertySource(locations="classpath:application.properties")
 public class ProfileControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
     @MockBean
-    private ProfileRepo repo;
+    private ProfileService service;
 
-    @Test
-    public void testShow() throws Exception {
-        Integer givenId = 1;
-        BDDMockito
-                .given(repo.findById(givenId))
-                .willReturn(Optional.of(new Profile(givenId, "Davis")));
+    private ProfileController controller;
 
-        String expectedContent = "{\"id\":1,\"name\":\"Davis\"}";
-        this.mockMvc.perform(MockMvcRequestBuilders
-                .get("/users/" + givenId))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string(expectedContent));
+    @Before
+        public void setUp() {
+            this.controller = new ProfileController(service);
     }
 
     @Test
-    public void testCreate() throws Exception {
-        Profile profile = new Profile(1, "Davis");
+    public void testCreate() {
+        //Given
+        HttpStatus expected = HttpStatus.CREATED;
+        Profile expectedProfile = new Profile();
         BDDMockito
-                .given(repo.save(profile))
-                .willReturn(profile);
+                .given(service.create(expectedProfile))
+                .willReturn(expectedProfile);
 
-        String expectedContent = "{\"id\":1,\"name\":\"Davis\"}";
-        this.mockMvc.perform(MockMvcRequestBuilders
-                .post("/users/")
-                .content(expectedContent)
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isCreated())
-                .andExpect(MockMvcResultMatchers.content().string(expectedContent));
+        //When
+        ResponseEntity<Profile> response = controller.create(expectedProfile);
+        HttpStatus actual = response.getStatusCode();
+        Profile actualProfile = response.getBody();
+
+        //Then
+        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expectedProfile, actualProfile);
     }
 
-    /*@Test
-    public void testGetAccounts() throws Exception {
-        Profile user = new Profile(1, "Davis");
+    @Test
+    public void testGetProfile() {
+        //Given
+        HttpStatus expected = HttpStatus.OK;
+        Profile expectedProfile = new Profile(1, "Davis");
+        BDDMockito
+                .given(service.getUser(1))
+                .willReturn(expectedProfile);
+
+        // When
+        ResponseEntity<Profile> response = controller.show(1);
+        HttpStatus actual = response.getStatusCode();
+        Profile actualProfile = response.getBody();
+
+        // Then
+        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expectedProfile, actualProfile);
+    }
+
+    //Given
+    @Test
+    public void testDeleteProfile() {
+        //Given
+        HttpStatus expected = HttpStatus.OK;
+        Profile expectedProfile = new Profile(1, "Davis");
+        BDDMockito
+                .given(service.deleteUser(1))
+                .willReturn(true);
+
+        //When
+        ResponseEntity<Boolean> response = controller.delete(1);
+        HttpStatus actual = response.getStatusCode();
+        Boolean actualBoolean = response.getBody();
+
+        //Then
+        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(true, actualBoolean);
+    }
+
+    @Test
+    public void testGetAccounts() {
+        //Given
+        HttpStatus expected = HttpStatus.OK;
         Account account = new Account(1, 5.0);
         List<Account> accountList = new ArrayList<>();
         accountList.add(account);
-        user.setAccounts(accountList);
-
         BDDMockito
-                .given(repo.findById(1))
-                .willReturn(Optional.(user.getAccounts().get(0)));
-    }*/
-    //I have not figure out the above code yet
-}
+                .given(service.getAccounts(1))
+                .willReturn(accountList);
 
+        //When
+        ResponseEntity<List<Account>> response = controller.getAccounts(1);
+        HttpStatus actual = response.getStatusCode();
+        List<Account> actualAccounts = response.getBody();
+
+        //Then
+        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(accountList, actualAccounts);
+    }
+}
