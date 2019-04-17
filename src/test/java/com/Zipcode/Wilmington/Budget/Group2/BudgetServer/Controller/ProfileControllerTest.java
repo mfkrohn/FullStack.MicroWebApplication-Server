@@ -31,8 +31,8 @@ public class ProfileControllerTest {
     private ProfileController controller;
 
     @Before
-    public void setUp() {
-        this.controller = new ProfileController(service);
+        public void setUp() {
+            this.controller = new ProfileController(service);
     }
 
     @Test
