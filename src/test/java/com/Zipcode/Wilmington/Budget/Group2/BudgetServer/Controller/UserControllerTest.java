@@ -1,5 +1,6 @@
 package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Controller;
 
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Account;
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.User;
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Repositories.UserRepo;
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Service.UserService;
@@ -18,6 +19,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -73,7 +76,7 @@ public class UserControllerTest {
 //    I have not figure out the below code yet
 
     @Test
-    public void testDelete() throws Exception {
+    public void testDelete() {
         User user = new User(1, "Davis");
         Mockito.when(repo.findById(1)).thenReturn(Optional.of(user));
 
@@ -82,17 +85,38 @@ public class UserControllerTest {
         Mockito.verify(repo, Mockito.times(1)).deleteById(1);
     }
 
-//    @Test
-//    public void testGetAccounts() throws Exception {
-//        User user = new User(1, "Davis");
-//        Account account = new Account(1, 5.0);
-//        List<Account> accountList = new ArrayList<>();
-//        accountList.add(account);
-//        user.setAccounts(accountList);
-//
-//        BDDMockito
-//                .given(repo.findById(1))
-//                .willReturn(Optional.(user.getAccounts().get(0)));
-//    }
+    @Test
+    public void testGetAccounts() {
+        User user = new User(1, "Davis");
+        Account account = new Account(1, 5.0);
+        List<Account> accountList = new ArrayList<>();
+        accountList.add(account);
+        user.setAccounts(accountList);
+        Mockito.when(repo.findById(1)).thenReturn(Optional.of(user));
+
+        service.getAccounts(1);
+
+        Mockito.verify(repo, Mockito.times(1)).findById(1);
+    }
+
+    @Test
+    public void testCreateUser() {
+        User user = new User(1, "Davis");
+        Mockito.when(repo.save(user)).thenReturn(user);
+
+        service.create(user);
+
+        Mockito.verify(repo, Mockito.times(1)).save(user);
+    }
+
+    @Test
+    public void testGetUser() {
+        User user = new User(1, "Davis");
+        Mockito.when(repo.findById(1)).thenReturn(Optional.of(user));
+
+        service.getUser(1);
+
+        Mockito.verify(repo, Mockito.times(1)).findById(1);
+    }
 }
 
