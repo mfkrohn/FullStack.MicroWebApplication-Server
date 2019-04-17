@@ -29,7 +29,7 @@ public class AccountService {
     public Account update(Integer accountID,Account newAccountData) {
         Account account = accountRepo.findById(accountID).get();
         account.setBalance(newAccountData.getBalance());
-        account.setUserID(newAccountData.getUserID());
+        account.setProfileID(newAccountData.getProfileID());
 
         return accountRepo.save(account);
     }
@@ -52,8 +52,8 @@ public class AccountService {
 
     public Account[] transfer(Integer accountIdFrom, Integer accountIdTo, Double amount){
         if(amount > 0 &&
-                accountRepo.findById(accountIdFrom).get().getUserID()
-                        .equals(accountRepo.findById(accountIdTo).get().getUserID())){
+                accountRepo.findById(accountIdFrom).get().getProfileID()
+                        .equals(accountRepo.findById(accountIdTo).get().getProfileID())){
             Account[] accounts = new Account[2];
         accounts[0] = withdraw(accountIdFrom,amount);
         accounts[1] = deposit(accountIdTo,amount);

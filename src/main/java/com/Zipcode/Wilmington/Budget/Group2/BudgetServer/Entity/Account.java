@@ -14,7 +14,7 @@ public class Account {
     private Integer id;
 
     @NotNull
-    private Integer userID;
+    private Integer profileID;
 
     @NotNull
     private Double balance;
@@ -22,8 +22,8 @@ public class Account {
     public Account() {
     }
 
-    public Account(@NotNull Integer userID, @NotNull Double balance) {
-        this.userID = userID;
+    public Account(@NotNull Integer profileID, @NotNull Double balance) {
+        this.profileID = profileID;
         this.balance = balance;
     }
 
