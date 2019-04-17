@@ -12,10 +12,13 @@ import java.util.Objects;
 public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "account_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotNull
+    @ManyToOne
+    @JoinColumn(name = "profile_ID")
     private Integer profileID;
 
     @NotNull
@@ -27,19 +30,5 @@ public class Account {
     public Account(@NotNull Integer profileID, @NotNull Double balance) {
         this.profileID = profileID;
         this.balance = balance;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Account account = (Account) o;
-        return Objects.equals(profileID, account.profileID) &&
-                Objects.equals(balance, account.balance);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(profileID, balance);
     }
 }
