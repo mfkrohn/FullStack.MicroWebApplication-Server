@@ -16,9 +16,8 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "profile_ID")
     private Integer profileID;
 
     @NotNull
