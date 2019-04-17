@@ -1,8 +1,7 @@
 package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Controller;
 
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Account;
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.User;
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Repositories.UserRepo;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Profile;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Repositories.ProfileRepo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
@@ -16,27 +15,25 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
-public class UserControllerTest {
+public class ProfileControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private UserRepo repo;
+    private ProfileRepo repo;
 
     @Test
     public void testShow() throws Exception {
         Integer givenId = 1;
         BDDMockito
                 .given(repo.findById(givenId))
-                .willReturn(Optional.of(new User(givenId, "Davis")));
+                .willReturn(Optional.of(new Profile(givenId, "Davis")));
 
         String expectedContent = "{\"id\":1,\"name\":\"Davis\"}";
         this.mockMvc.perform(MockMvcRequestBuilders
@@ -47,10 +44,10 @@ public class UserControllerTest {
 
     @Test
     public void testCreate() throws Exception {
-        User user = new User(1, "Davis");
+        Profile profile = new Profile(1, "Davis");
         BDDMockito
-                .given(repo.save(user))
-                .willReturn(user);
+                .given(repo.save(profile))
+                .willReturn(profile);
 
         String expectedContent = "{\"id\":1,\"name\":\"Davis\"}";
         this.mockMvc.perform(MockMvcRequestBuilders
@@ -64,7 +61,7 @@ public class UserControllerTest {
 
     /*@Test
     public void testGetAccounts() throws Exception {
-        User user = new User(1, "Davis");
+        Profile user = new Profile(1, "Davis");
         Account account = new Account(1, 5.0);
         List<Account> accountList = new ArrayList<>();
         accountList.add(account);
