@@ -112,7 +112,7 @@ public class AccountControllerTest {
         HttpStatus expected = HttpStatus.OK;
         Account depositAccount = new Account(1, 5.0);
         BDDMockito
-                .given(service.withdraw(1 ,5.0))
+                .given(service.deposit(1 ,5.0))
                 .willReturn(depositAccount);
 
         BDDMockito

@@ -29,11 +29,11 @@ public class ProfileService {
         return profileRepo.findById(userId).get().getAccounts();
     }
 
-    public Profile updateName(Profile profile, Integer userID){
-        Profile originalProfile = profileRepo.findById(userID).get();
-        originalProfile.setName(profile.getName());
-        return profileRepo.save(originalProfile);
-    }
+//    public Profile updateName(Profile profile, Integer userID){
+//        Profile originalProfile = profileRepo.findById(userID).get();
+//        originalProfile.setName(profile.getName());
+//        return profileRepo.save(originalProfile);
+//    }
 
     public Boolean deleteUser(Integer userID){
         profileRepo.deleteById(userID);
