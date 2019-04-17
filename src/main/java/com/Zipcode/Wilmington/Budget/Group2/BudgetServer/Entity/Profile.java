@@ -1,12 +1,14 @@
 package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Data
 public class Profile {
 
     @Id
@@ -15,7 +17,7 @@ public class Profile {
 
     private String name;
 
-    @OneToMany(mappedBy = "userID", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "profileID", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Account> accounts;
 
@@ -25,26 +27,6 @@ public class Profile {
     public Profile(Integer id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public List<Account> getAccounts() {
-        return accounts;
-    }
-
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
     }
 
     @Override
