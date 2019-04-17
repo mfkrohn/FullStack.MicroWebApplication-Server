@@ -12,10 +12,13 @@ import java.util.Objects;
 public class Account {
 
     @Id
+    @Column(name = "account_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotNull
+    @ManyToOne
+    @JoinColumn(name = "profile_ID")
     private Integer profileID;
 
     @NotNull

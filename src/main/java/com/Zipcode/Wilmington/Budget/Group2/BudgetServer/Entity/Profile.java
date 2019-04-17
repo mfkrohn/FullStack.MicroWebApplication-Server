@@ -4,14 +4,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Data
 public class Profile {
 
     @Id
+    @Column(name = "profile_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -19,7 +22,7 @@ public class Profile {
 
     @OneToMany(mappedBy = "profileID", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Account> accounts;
+    private Set<Account> accounts = new HashSet<>(0);
 
     public Profile() {
     }
