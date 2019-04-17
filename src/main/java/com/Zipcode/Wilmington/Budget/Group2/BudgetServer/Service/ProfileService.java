@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ProfileService {
@@ -25,7 +26,7 @@ public class ProfileService {
         return profileRepo.findById(userID).get();
     }
 
-    public List<Account> getAccounts(Integer userId){
+    public Set<Account> getAccounts(Integer userId){
         return profileRepo.findById(userId).get().getAccounts();
     }
 

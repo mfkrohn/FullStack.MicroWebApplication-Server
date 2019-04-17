@@ -11,9 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -44,7 +42,7 @@ public class ProfileServiceTest {
     public void testGetAccounts() {
         Profile profile = new Profile(1, "Davis");
         Account account = new Account(1, 5.0);
-        List<Account> accountList = new ArrayList<>();
+        Set<Account> accountList = new HashSet<>();
         accountList.add(account);
         profile.setAccounts(accountList);
         Mockito.when(repo.findById(1)).thenReturn(Optional.of(profile));

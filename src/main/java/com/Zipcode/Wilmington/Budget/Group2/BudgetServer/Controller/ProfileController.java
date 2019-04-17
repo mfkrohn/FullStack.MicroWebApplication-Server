@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class ProfileController {
@@ -31,7 +32,7 @@ public class ProfileController {
     }
 
     @GetMapping("profiles/{userId}/accounts")
-    public  ResponseEntity<List<Account>> getAccounts(@PathVariable Integer userId){
+    public  ResponseEntity<Set<Account>> getAccounts(@PathVariable Integer userId){
         return new ResponseEntity<>(profileService.getAccounts(userId),HttpStatus.OK);
     }
 
