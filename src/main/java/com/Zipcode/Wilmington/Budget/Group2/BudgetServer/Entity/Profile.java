@@ -14,6 +14,7 @@ import java.util.Set;
 public class Profile {
 
     @Id
+    @Column(name = "profile_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
