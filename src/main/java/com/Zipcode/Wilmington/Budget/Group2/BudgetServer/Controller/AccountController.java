@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 @RestController
 public class AccountController {
 
@@ -25,6 +27,11 @@ public class AccountController {
     @GetMapping("/accounts/{accountId}")
     public ResponseEntity<Account> read(@PathVariable Integer accountId){
             return new ResponseEntity<>(accountService.getAccount(accountId),HttpStatus.OK);
+    }
+
+    @GetMapping("profiles/accounts/{userId}")
+    public  ResponseEntity<Set<Account>> getAccounts(@PathVariable Integer userId){
+        return new ResponseEntity<>(accountService.getAccounts(userId),HttpStatus.OK);
     }
 
     @PutMapping("/accounts/{accountId}")

@@ -5,6 +5,8 @@ import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Repositories.AccountRep
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 public class AccountService {
 
@@ -23,6 +25,12 @@ public class AccountService {
     public Account getAccount(Integer accountID) {
 
         return accountRepo.findById(accountID).get();
+
+    }
+
+    public Set<Account> getAccounts(Integer profile_id) {
+
+        return accountRepo.findAllByProfileID(profile_id);
 
     }
 
