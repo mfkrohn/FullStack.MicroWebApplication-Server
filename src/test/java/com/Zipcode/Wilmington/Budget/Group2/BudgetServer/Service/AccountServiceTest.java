@@ -96,8 +96,10 @@ public class AccountServiceTest {
         Mockito.when(repo.findById(2)).thenReturn(Optional.of(account2));
 
         service.transfer(1, 2, 100.00);
+        account = service.withdraw(1, 100.00);
+        account2 = service.deposit(2, 100.00);
 
-        Mockito.verify(repo, Mockito.times(1)).findById(1);
+        Mockito.verify(repo, Mockito.times(2)).findById(1);
     }
 
 }
