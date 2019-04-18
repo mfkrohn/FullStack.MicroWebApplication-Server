@@ -16,9 +16,9 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
+    @Column(name = "profile_id")
     @NotNull
-    private Integer profile_id;
+    private Integer profileID;
 
     @NotNull
     private Double balance;
@@ -27,7 +27,7 @@ public class Account {
     }
 
     public Account(@NotNull Integer profileID, @NotNull Double balance) {
-        this.profile_id = profileID;
+        this.profileID = profileID;
         this.balance = balance;
     }
 }
