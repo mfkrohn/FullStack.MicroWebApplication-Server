@@ -69,11 +69,21 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void testWithdrawAccount() {
+    public void testWithdraw() {
         Account account = new Account(1, 100.00);
         Mockito.when(repo.findById(1)).thenReturn(Optional.of(account));
 
         service.withdraw(1, 10.00);
+
+        Mockito.verify(repo, Mockito.times(1)).findById(1);
+    }
+
+    @Test
+    public void testDeposit() {
+        Account account = new Account(1, 1000.00);
+        Mockito.when(repo.findById(1)).thenReturn(Optional.of(account));
+
+        service.deposit(1, 100.00);
 
         Mockito.verify(repo, Mockito.times(1)).findById(1);
     }
