@@ -19,7 +19,7 @@ public class Profile {
 
     private String name;
 
-    @OneToMany(mappedBy = "profile_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "profileID", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Account> accounts = new HashSet<>(0);
 
