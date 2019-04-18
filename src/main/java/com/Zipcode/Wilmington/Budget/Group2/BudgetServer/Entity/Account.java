@@ -18,7 +18,7 @@ public class Account {
 
 
     @NotNull
-    private Integer profileID;
+    private Integer profile_id;
 
     @NotNull
     private Double balance;
@@ -27,7 +27,7 @@ public class Account {
     }
 
     public Account(@NotNull Integer profileID, @NotNull Double balance) {
-        this.profileID = profileID;
+        this.profile_id = profileID;
         this.balance = balance;
     }
 }
