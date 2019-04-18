@@ -16,8 +16,9 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "profile_id")
+
     @NotNull
+    @Column(name = "profile_id")
     private Integer profileID;
 
     @NotNull
