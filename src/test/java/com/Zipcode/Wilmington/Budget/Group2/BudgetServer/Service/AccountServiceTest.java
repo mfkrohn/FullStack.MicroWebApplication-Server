@@ -88,4 +88,16 @@ public class AccountServiceTest {
         Mockito.verify(repo, Mockito.times(1)).findById(1);
     }
 
+    @Test
+    public void testTransfer() {
+        Account account = new Account(1, 1000.00);
+        Account account2 = new Account(2, 10.00);
+        Mockito.when(repo.findById(1)).thenReturn(Optional.of(account));
+        Mockito.when(repo.findById(2)).thenReturn(Optional.of(account2));
+
+        service.transfer(1, 2, 100.00);
+
+        Mockito.verify(repo, Mockito.times(1)).findById(1);
+    }
+
 }
