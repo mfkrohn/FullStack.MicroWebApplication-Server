@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Arrays;
+
 import java.util.Optional;
 
 @SpringBootTest
@@ -100,17 +100,26 @@ public class AccountServiceTest {
     @Test
     public void testTransfer() {
         Account account = new Account(1, 1000.00);
-        Account account2 = new Account(2, 10.00);
-        Account[] expected = {account, account2};
+        Account account2 = new Account(1, 10.00);
         Mockito.when(repo.findById(1)).thenReturn(Optional.of(account));
         Mockito.when(repo.findById(2)).thenReturn(Optional.of(account2));
 
-        service.withdraw(1, 100.00);
-        service.deposit(2, 100.00);
-        Mockito.when(repo.findAll()).thenReturn(Arrays.asList(expected));
         service.transfer(1, 2, 100.00);
 
         Mockito.verify(repo, Mockito.times(2)).findById(1);
+    }
+
+    @Test
+    public void testTransfer2() {
+        Account account = new Account(1, 1000.00);
+        Account account2 = new Account(1, 10.00);
+        Mockito.when(repo.findById(1)).thenReturn(Optional.of(account));
+        Mockito.when(repo.findById(2)).thenReturn(Optional.of(account2));
+
+        Account[] actual = service.transfer(1, 2, -100.00);
+
+        Mockito.verify(repo, Mockito.times(0)).findById(1);
+        Assert.assertNull(actual);
     }
 
 }
