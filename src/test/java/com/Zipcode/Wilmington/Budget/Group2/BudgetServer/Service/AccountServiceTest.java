@@ -1,7 +1,9 @@
 package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Service;
 
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Controller.AccountController;
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Account;
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Repositories.AccountRepo;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +11,8 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Arrays;
 import java.util.Optional;
 
 @SpringBootTest
@@ -22,9 +26,14 @@ public class AccountServiceTest {
     @MockBean
     private AccountService service;
 
+    @MockBean
+    private AccountController controller;
+
     @Before
     public void setup() {
-        service = new AccountService(repo);
+        this.controller = new AccountController(service);
+        this.repo = Mockito.mock(AccountRepo.class);
+        this.service = new AccountService(repo);
     }
 
     @Test
@@ -92,12 +101,14 @@ public class AccountServiceTest {
     public void testTransfer() {
         Account account = new Account(1, 1000.00);
         Account account2 = new Account(2, 10.00);
+        Account[] expected = {account, account2};
         Mockito.when(repo.findById(1)).thenReturn(Optional.of(account));
         Mockito.when(repo.findById(2)).thenReturn(Optional.of(account2));
 
+        service.withdraw(1, 100.00);
+        service.deposit(2, 100.00);
+        Mockito.when(repo.findAll()).thenReturn(Arrays.asList(expected));
         service.transfer(1, 2, 100.00);
-        account = service.withdraw(1, 100.00);
-        account2 = service.deposit(2, 100.00);
 
         Mockito.verify(repo, Mockito.times(2)).findById(1);
     }
