@@ -46,7 +46,7 @@ public class ProfileService {
         return true;
     }
 
-    public Boolean deleteAllUsers() {
+    public Boolean deleteAllProfiles() {
         profileRepo.deleteAll();
         return true;
     }
