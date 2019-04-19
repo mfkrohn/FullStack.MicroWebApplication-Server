@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@CrossOrigin("http://localhost:4200/")
+@CrossOrigin("*")
 public class ProfileController {
 
     @Autowired
