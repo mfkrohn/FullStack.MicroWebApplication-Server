@@ -16,9 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -143,9 +141,23 @@ public class ProfileControllerTest {
     @Test
     public void testDeleteAllProfiles() {
         // Given
-
+        HttpStatus expected = HttpStatus.OK;
+        Profile profile = new Profile(1, "Julian");
+        Profile profile1 = new Profile(2, "Mike");
+        Set<Profile> expectedProfiles = new HashSet<>();
+        expectedProfiles.add(profile);
+        expectedProfiles.add(profile1);
+        BDDMockito
+                .given(service.deleteAllProfiles())
+                .willReturn(true);
+        
         // When
+        ResponseEntity<Boolean> response = controller.deleteAllProfiles();
+        HttpStatus actual = response.getStatusCode();
+        Boolean actualBoolean = response.getBody();
 
         // Then
+        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(true, actualBoolean);
     }
 }
