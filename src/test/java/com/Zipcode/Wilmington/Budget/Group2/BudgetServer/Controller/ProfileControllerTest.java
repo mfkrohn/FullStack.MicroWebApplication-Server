@@ -139,4 +139,13 @@ public class ProfileControllerTest {
         Assert.assertEquals(expected, actual);
         Assert.assertEquals(expectedProfiles, actualProfiles);
     }
+
+    @Test
+    public void testDeleteAllProfiles() {
+        // Given
+
+        // When
+
+        // Then
+    }
 }

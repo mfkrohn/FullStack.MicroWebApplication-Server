@@ -45,4 +45,9 @@ public class ProfileService {
         profileRepo.deleteById(userID);
         return true;
     }
+
+    public Boolean deleteAllUsers() {
+        profileRepo.deleteAll();
+        return true;
+    }
 }
