@@ -71,6 +71,19 @@ public class ProfileServiceTest {
 
         Mockito.verify(repo, Mockito.times(1)).findById(1);
     }
+
+    @Test
+    public void testGetAllProfiles() {
+        Profile profile = new Profile(1, "Julian");
+        Profile profile1 = new Profile(2, "Mike");
+        Set<Profile> expectedProfiles = new HashSet<>();
+        expectedProfiles.add(profile);
+        expectedProfiles.add(profile1);
+
+        service.getAllUsers();
+
+        Mockito.verify(repo, Mockito.times(1)).findAll();
+    }
 //    @Test
 //    public void testShow() throws Exception {
 //        Integer givenId = 1;

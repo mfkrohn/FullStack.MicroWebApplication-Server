@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Response;
 import java.util.List;
 import java.util.Set;
 
@@ -36,6 +37,11 @@ public class ProfileController {
         return new ResponseEntity<>(profileService.getAccounts(userId),HttpStatus.OK);
     }
 
+    @GetMapping("/profiles/allProfiles")
+    public ResponseEntity<Set<Profile>> getAllProfiles() {
+        return new ResponseEntity<>(profileService.getAllUsers(), HttpStatus.OK);
+    }
+
 //    @PutMapping("/users/{userId}")
 //    public ResponseEntity<Profile> update(@PathVariable Integer userId, @RequestBody Profile user){
 //        return new ResponseEntity<>(userService.updateName(user, userId), HttpStatus.OK);
@@ -44,5 +50,10 @@ public class ProfileController {
     @DeleteMapping("/profiles/{userId}")
     public ResponseEntity<Boolean> delete(@PathVariable Integer userId){
         return new ResponseEntity<>(profileService.deleteUser(userId), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/profiles/deleteAllProfiles")
+    public ResponseEntity<Boolean> deleteAllProfiles() {
+        return new ResponseEntity<>(profileService.deleteAllUsers(), HttpStatus.OK);
     }
 }

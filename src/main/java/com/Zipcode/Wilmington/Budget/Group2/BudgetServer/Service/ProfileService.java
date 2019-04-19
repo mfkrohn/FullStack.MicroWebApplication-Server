@@ -6,6 +6,7 @@ import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Repositories.ProfileRep
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -26,6 +27,10 @@ public class ProfileService {
         return profileRepo.findById(userID).get();
     }
 
+    public Set<Profile> getAllUsers() {
+        return new HashSet<>(profileRepo.findAll());
+    }
+
     public Set<Account> getAccounts(Integer userId){
         return profileRepo.findById(userId).get().getAccounts();
     }
@@ -38,6 +43,11 @@ public class ProfileService {
 
     public Boolean deleteUser(Integer userID){
         profileRepo.deleteById(userID);
+        return true;
+    }
+
+    public Boolean deleteAllUsers() {
+        profileRepo.deleteAll();
         return true;
     }
 }
