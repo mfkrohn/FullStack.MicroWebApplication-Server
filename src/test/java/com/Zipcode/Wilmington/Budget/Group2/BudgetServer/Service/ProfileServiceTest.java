@@ -87,7 +87,7 @@ public class ProfileServiceTest {
     }
 
     @Test
-    public void deleteAllProfiles() {
+    public void testDeleteAllProfiles() {
         Profile profile = new Profile(1, "Julian");
         Profile profile1 = new Profile(2, "Mike");
         Set<Profile> expectedProfiles = new HashSet<>();
