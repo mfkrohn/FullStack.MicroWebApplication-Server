@@ -36,6 +36,11 @@ public class ProfileController {
         return new ResponseEntity<>(profileService.getAccounts(userId),HttpStatus.OK);
     }
 
+    @GetMapping("/profiles/allProfiles")
+    public ResponseEntity<Set<Profile>> getAllProfiles() {
+        return new ResponseEntity<>(profileService.getAllUsers(), HttpStatus.OK);
+    }
+
 //    @PutMapping("/users/{userId}")
 //    public ResponseEntity<Profile> update(@PathVariable Integer userId, @RequestBody Profile user){
 //        return new ResponseEntity<>(userService.updateName(user, userId), HttpStatus.OK);

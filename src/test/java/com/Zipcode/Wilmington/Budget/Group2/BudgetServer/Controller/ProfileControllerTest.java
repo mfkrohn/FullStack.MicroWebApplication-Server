@@ -115,4 +115,28 @@ public class ProfileControllerTest {
         Assert.assertEquals(expected, actual);
         Assert.assertEquals(accountList, actualAccounts);
     }
+
+    @Test
+    public void testGetAllProfiles() {
+        // Given
+        HttpStatus expected = HttpStatus.OK;
+        Profile profile = new Profile(1, "Julian");
+        Profile profile1 = new Profile(2, "Mike");
+        Set<Profile> expectedProfiles = new HashSet<>();
+        expectedProfiles.add(profile);
+        expectedProfiles.add(profile1);
+        BDDMockito
+                .given(service.getAllUsers())
+                .willReturn(expectedProfiles);
+
+
+        // When
+        ResponseEntity<Set<Profile>> response = controller.getAllProfiles();
+        HttpStatus actual = response.getStatusCode();
+        Set<Profile> actualProfiles = response.getBody();
+
+        // Then
+        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expectedProfiles, actualProfiles);
+    }
 }
