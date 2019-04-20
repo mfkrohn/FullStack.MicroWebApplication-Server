@@ -35,6 +35,11 @@ public class AccountController {
         return new ResponseEntity<>(accountService.getAccounts(userId),HttpStatus.OK);
     }
 
+    @GetMapping("profiles/numberOfAccounts/{userId}")
+    public ResponseEntity<Integer> getNumberOfAccounts(@PathVariable Integer userId){
+        return new ResponseEntity<>(accountService.getNumberOfAccounts(userId),HttpStatus.OK);
+    }
+
     @PutMapping("/accounts/{accountId}")
     public  ResponseEntity<Account> update(@PathVariable Integer accountId, @RequestBody Account account){
             return new ResponseEntity<>(accountService.update(accountId, account), HttpStatus.OK);
