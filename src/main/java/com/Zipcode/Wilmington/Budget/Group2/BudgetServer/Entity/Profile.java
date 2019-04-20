@@ -4,22 +4,25 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Data
 public class Profile {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "profile_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
 
-    @OneToMany(mappedBy = "profileID", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "profileID", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<Account> accounts;
+    private Set<Account> accounts = new HashSet<>(0);
 
     public Profile() {
     }
@@ -42,4 +45,8 @@ public class Profile {
     public int hashCode() {
         return Objects.hash(id, name);
     }
+
+
 }
+
+

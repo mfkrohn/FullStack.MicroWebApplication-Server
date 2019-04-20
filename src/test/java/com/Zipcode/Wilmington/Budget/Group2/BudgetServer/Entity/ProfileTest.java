@@ -20,4 +20,20 @@ public class ProfileTest {
         String json = jsonWriter.writeValueAsString(profile);
     }
 
+    @Test
+    public void testEquals() {
+        Profile profile = new Profile(1, "Julian");
+        Profile profile1 = new Profile(1, "Julian");
+        Assert.assertTrue(profile.equals(profile1) && profile1.equals(profile));
+    }
+
+    @Test
+    public void testHashCode() {
+        Profile profile = new Profile(1, "Julian");
+        Profile profile1 = new Profile(1, "Julian");
+        Assert.assertTrue(profile.hashCode() == profile1.hashCode());
+    }
+
+
+
 }

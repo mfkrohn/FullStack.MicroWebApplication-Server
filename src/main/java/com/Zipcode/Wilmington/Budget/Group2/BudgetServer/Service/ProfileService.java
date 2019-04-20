@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ProfileService {
@@ -25,15 +26,15 @@ public class ProfileService {
         return profileRepo.findById(userID).get();
     }
 
-    public List<Account> getAccounts(Integer userId){
+    public Set<Account> getAccounts(Integer userId){
         return profileRepo.findById(userId).get().getAccounts();
     }
 
-    public Profile updateName(Profile profile, Integer userID){
-        Profile originalProfile = profileRepo.findById(userID).get();
-        originalProfile.setName(profile.getName());
-        return profileRepo.save(originalProfile);
-    }
+//    public Profile updateName(Profile profile, Integer userID){
+//        Profile originalProfile = profileRepo.findById(userID).get();
+//        originalProfile.setName(profile.getName());
+//        return profileRepo.save(originalProfile);
+//    }
 
     public Boolean deleteUser(Integer userID){
         profileRepo.deleteById(userID);

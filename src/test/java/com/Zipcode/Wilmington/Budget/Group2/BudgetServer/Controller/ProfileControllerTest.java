@@ -17,7 +17,9 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @RunWith(SpringRunner.class)
@@ -31,8 +33,8 @@ public class ProfileControllerTest {
     private ProfileController controller;
 
     @Before
-    public void setUp() {
-        this.controller = new ProfileController(service);
+        public void setUp() {
+            this.controller = new ProfileController(service);
     }
 
     @Test
@@ -98,16 +100,16 @@ public class ProfileControllerTest {
         //Given
         HttpStatus expected = HttpStatus.OK;
         Account account = new Account(1, 5.0);
-        List<Account> accountList = new ArrayList<>();
+        Set<Account> accountList = new HashSet<>();
         accountList.add(account);
         BDDMockito
                 .given(service.getAccounts(1))
                 .willReturn(accountList);
 
         //When
-        ResponseEntity<List<Account>> response = controller.getAccounts(1);
+        ResponseEntity<Set<Account>> response = controller.getAccounts(1);
         HttpStatus actual = response.getStatusCode();
-        List<Account> actualAccounts = response.getBody();
+        Set<Account> actualAccounts = response.getBody();
 
         //Then
         Assert.assertEquals(expected, actual);
