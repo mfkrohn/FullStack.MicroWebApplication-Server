@@ -18,6 +18,7 @@ public class Account {
 
 
     @NotNull
+    @Column(name = "profile_id")
     private Integer profileID;
 
     @NotNull

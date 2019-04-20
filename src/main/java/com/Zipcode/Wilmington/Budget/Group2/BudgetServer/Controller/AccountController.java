@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
+@CrossOrigin("*")
 public class AccountController {
 
     private AccountService accountService;
@@ -32,6 +33,11 @@ public class AccountController {
     @GetMapping("profiles/accounts/{userId}")
     public  ResponseEntity<Set<Account>> getAccounts(@PathVariable Integer userId){
         return new ResponseEntity<>(accountService.getAccounts(userId),HttpStatus.OK);
+    }
+
+    @GetMapping("profiles/numberOfAccounts/{userId}")
+    public ResponseEntity<Integer> getNumberOfAccounts(@PathVariable Integer userId){
+        return new ResponseEntity<>(accountService.getNumberOfAccounts(userId),HttpStatus.OK);
     }
 
     @PutMapping("/accounts/{accountId}")

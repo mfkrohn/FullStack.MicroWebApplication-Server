@@ -3,6 +3,7 @@ package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Service;
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Account;
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Profile;
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Repositories.ProfileRepo;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -70,6 +71,31 @@ public class ProfileServiceTest {
         service.getUser(1);
 
         Mockito.verify(repo, Mockito.times(1)).findById(1);
+    }
+
+    @Test
+    public void testGetAllProfiles() {
+        Profile profile = new Profile(1, "Julian");
+        Profile profile1 = new Profile(2, "Mike");
+        Set<Profile> expectedProfiles = new HashSet<>();
+        expectedProfiles.add(profile);
+        expectedProfiles.add(profile1);
+
+        service.getAllUsers();
+
+        Mockito.verify(repo, Mockito.times(1)).findAll();
+    }
+
+    @Test
+    public void testDeleteAllProfiles() {
+        Profile profile = new Profile(1, "Julian");
+        Profile profile1 = new Profile(2, "Mike");
+        Set<Profile> expectedProfiles = new HashSet<>();
+        expectedProfiles.add(profile);
+        expectedProfiles.add(profile1);
+
+        service.deleteAllProfiles();
+        Mockito.verify(repo, Mockito.times(1)).deleteAll();
     }
 //    @Test
 //    public void testShow() throws Exception {

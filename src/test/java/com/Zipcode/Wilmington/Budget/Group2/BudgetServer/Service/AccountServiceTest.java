@@ -13,7 +13,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -64,6 +67,16 @@ public class AccountServiceTest {
         service.getAccount(1);
 
         Mockito.verify(repo, Mockito.times(1)).findById(1);
+    }
+
+    @Test
+    public void testGetAllAccounts() {
+        Account account = new Account(1, 100.00);
+        Account account1 = new Account(1, 200.00);
+
+        service.getAccounts(1);
+
+        Mockito.verify(repo, Mockito.times(1)).findAllByProfileID(1);
     }
 
     @Test

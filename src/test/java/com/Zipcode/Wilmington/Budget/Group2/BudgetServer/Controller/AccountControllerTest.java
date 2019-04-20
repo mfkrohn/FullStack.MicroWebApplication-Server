@@ -2,6 +2,7 @@ package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Controller;
 
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.BudgetServerApplication;
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Account;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Profile;
 import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Service.AccountService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,6 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 @RunWith(SpringRunner.class)
@@ -63,6 +67,28 @@ public class AccountControllerTest {
         // Then
         Assert.assertEquals(expected, actual);
         Assert.assertEquals(expectedAccount, actualAccount);
+    }
+
+    @Test
+    public void testGetAllAccounts() {
+        HttpStatus expected = HttpStatus.OK;
+        Account account = new Account(1, 100.00);
+        Account account1 = new Account(1, 200.00);
+        Set<Account> expectedAccountList = new HashSet<>();
+        expectedAccountList.add(account);
+        expectedAccountList.add(account1);
+        BDDMockito
+                .given(service.getAccounts(1))
+                .willReturn(expectedAccountList);
+
+        // When
+        ResponseEntity<Set<Account>> response = controller.getAccounts(1);
+        HttpStatus actual = response.getStatusCode();
+        Set<Account> actualAccountList = response.getBody();
+
+        // Then
+        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expectedAccountList, actualAccountList);
     }
 
     @Test
