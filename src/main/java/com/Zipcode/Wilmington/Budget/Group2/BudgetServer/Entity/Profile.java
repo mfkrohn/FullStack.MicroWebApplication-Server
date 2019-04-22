@@ -24,7 +24,6 @@ public class Profile {
     @JsonIgnore
     private Set<Account> accounts = new HashSet<>(0);
 
-    private Integer numberOfAccounts = getNumberOfAccounts();
 
     public Profile() {
     }
@@ -33,11 +32,7 @@ public class Profile {
         this.id = id;
         this.name = name;
     }
-
-    @Formula("(select count(*) from accounts where profile_id = profile_id)")
-    public Integer getNumberOfAccounts(){
-        return numberOfAccounts;
-    }
+    
 
     @Override
     public boolean equals(Object o) {
