@@ -79,5 +79,8 @@ public class AccountService {
         return true;
     }
 
-
+    public Boolean deleteAllAccounts() {
+        accountRepo.deleteAll();
+        return true;
+    }
 }
