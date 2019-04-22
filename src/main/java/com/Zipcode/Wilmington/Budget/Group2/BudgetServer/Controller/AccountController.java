@@ -30,12 +30,12 @@ public class AccountController {
             return new ResponseEntity<>(accountService.getAccount(accountId),HttpStatus.OK);
     }
 
-    @GetMapping("profiles/accounts/{userId}")
+    @GetMapping("/accounts/all/{userId}")
     public  ResponseEntity<Set<Account>> getAccounts(@PathVariable Integer userId){
         return new ResponseEntity<>(accountService.getAccounts(userId),HttpStatus.OK);
     }
 
-    @GetMapping("profiles/numberOfAccounts/{userId}")
+    @GetMapping("accounts/numberOfAccounts/{userId}")
     public ResponseEntity<Integer> getNumberOfAccounts(@PathVariable Integer userId){
         return new ResponseEntity<>(accountService.getNumberOfAccounts(userId),HttpStatus.OK);
     }
