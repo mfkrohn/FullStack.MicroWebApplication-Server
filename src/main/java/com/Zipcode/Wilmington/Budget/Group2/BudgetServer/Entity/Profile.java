@@ -2,6 +2,7 @@ package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -23,6 +24,7 @@ public class Profile {
     @JsonIgnore
     private Set<Account> accounts = new HashSet<>(0);
 
+
     public Profile() {
     }
 
@@ -30,6 +32,7 @@ public class Profile {
         this.id = id;
         this.name = name;
     }
+    
 
     @Override
     public boolean equals(Object o) {
