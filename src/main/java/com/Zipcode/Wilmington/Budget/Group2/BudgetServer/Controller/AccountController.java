@@ -67,4 +67,9 @@ public class AccountController {
     public ResponseEntity<Boolean> delete(@PathVariable Integer accountId){
         return new ResponseEntity<>(accountService.delete(accountId),HttpStatus.OK);
     }
+
+    @DeleteMapping("/accounts/")
+    public ResponseEntity<Boolean> deleteAllAccounts() {
+        return new ResponseEntity<>(accountService.deleteAllAccounts(),HttpStatus.OK);
+    }
 }
