@@ -32,7 +32,6 @@ public class Profile {
         this.id = id;
         this.name = name;
     }
-    
 
     @Override
     public boolean equals(Object o) {
