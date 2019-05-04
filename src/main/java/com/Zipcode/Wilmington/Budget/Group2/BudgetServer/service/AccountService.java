@@ -1,10 +1,11 @@
-package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Service;
+package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.service;
 
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Account;
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Repositories.AccountRepo;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.models.Account;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.repositories.AccountRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -50,6 +51,7 @@ public class AccountService {
         Account account = accountRepo.findById(accountID).get();
         if(amount > 0 && amount <= account.getBalance()) {
             account.setBalance(account.getBalance() - amount);
+            account.updateBalanceHistory();
         }
         return accountRepo.save(account);
     }
@@ -58,6 +60,7 @@ public class AccountService {
         Account account = accountRepo.findById(accountID).get();
         if(amount > 0){
             account.setBalance(account.getBalance() + amount);
+            account.updateBalanceHistory();
         }
         return accountRepo.save(account);
     }
@@ -68,7 +71,9 @@ public class AccountService {
                         .equals(accountRepo.findById(accountIdTo).get().getProfileID())){
             Account[] accounts = new Account[2];
         accounts[0] = withdraw(accountIdFrom,amount);
+        accounts[0].updateBalanceHistory();
         accounts[1] = deposit(accountIdTo,amount);
+        accounts[1].updateBalanceHistory();
         return accounts;
         }
         return null;
@@ -82,5 +87,10 @@ public class AccountService {
     public Boolean deleteAllAccounts() {
         accountRepo.deleteAll();
         return true;
+    }
+
+    public List<Double> getAccountBalanceHistory(Integer accountID) {
+        Account account = accountRepo.findById(accountID).get();
+        return account.getBalanceHistory();
     }
 }

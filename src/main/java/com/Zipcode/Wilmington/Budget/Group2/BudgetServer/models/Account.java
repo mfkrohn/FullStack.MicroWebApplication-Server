@@ -1,11 +1,12 @@
-package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity;
+package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.constraints.NotNull;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -24,11 +25,19 @@ public class Account {
     @NotNull
     private Double balance;
 
+    @JsonIgnore
+    @ElementCollection
+    private List<Double> balanceHistory = new ArrayList<>();
+
     public Account() {
     }
 
     public Account(@NotNull Integer profileID, @NotNull Double balance) {
         this.profileID = profileID;
         this.balance = balance;
+    }
+
+    public void updateBalanceHistory(){
+        this.balanceHistory.add(balance);
     }
 }

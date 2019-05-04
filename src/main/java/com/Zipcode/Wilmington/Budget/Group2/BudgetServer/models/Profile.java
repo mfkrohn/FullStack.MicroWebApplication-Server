@@ -1,8 +1,7 @@
-package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity;
+package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -32,7 +31,6 @@ public class Profile {
         this.id = id;
         this.name = name;
     }
-    
 
     @Override
     public boolean equals(Object o) {

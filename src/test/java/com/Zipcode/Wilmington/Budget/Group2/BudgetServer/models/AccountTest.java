@@ -1,4 +1,4 @@
-package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity;
+package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.models;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

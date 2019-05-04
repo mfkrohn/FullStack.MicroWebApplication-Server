@@ -1,12 +1,13 @@
-package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Controller;
+package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.controllers;
 
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Account;
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Service.AccountService;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.models.Account;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -19,6 +20,7 @@ public class AccountController {
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
     }
+
     @PostMapping("/accounts")
     public ResponseEntity<Account> create(@RequestBody Account account){
 
@@ -38,6 +40,11 @@ public class AccountController {
     @GetMapping("accounts/numberOfAccounts/{userId}")
     public ResponseEntity<Integer> getNumberOfAccounts(@PathVariable Integer userId){
         return new ResponseEntity<>(accountService.getNumberOfAccounts(userId),HttpStatus.OK);
+    }
+
+    @GetMapping("accounts/balanceHistory/{userId}")
+    public ResponseEntity<List> getAccountBalanceHistory(@PathVariable Integer userId){
+        return new ResponseEntity<>(accountService.getAccountBalanceHistory(userId),HttpStatus.OK);
     }
 
     @PutMapping("/accounts/{accountId}")

@@ -1,13 +1,12 @@
-package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Service;
+package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.service;
 
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Account;
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Profile;
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Repositories.ProfileRepo;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.models.Account;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.models.Profile;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.repositories.ProfileRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service
