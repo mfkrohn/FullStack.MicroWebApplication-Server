@@ -27,6 +27,7 @@ public class Account {
 
     @JsonIgnore
     @ElementCollection
+    @Column(name = "balance_history")
     private List<Double> balanceHistory = new ArrayList<>();
 
     public Account() {
