@@ -1,6 +1,6 @@
-package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Repositories;
+package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.repositories;
 
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Profile;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.models.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

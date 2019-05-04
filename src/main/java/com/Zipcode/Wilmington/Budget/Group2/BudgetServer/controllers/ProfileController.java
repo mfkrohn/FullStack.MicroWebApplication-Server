@@ -1,8 +1,8 @@
-package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Controller;
+package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.controllers;
 
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Account;
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Profile;
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Service.ProfileService;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.models.Account;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.models.Profile;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

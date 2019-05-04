@@ -1,8 +1,8 @@
-package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Service;
+package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.service;
 
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Controller.AccountController;
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Account;
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Repositories.AccountRepo;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.controllers.AccountController;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.models.Account;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.repositories.AccountRepo;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 

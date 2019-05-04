@@ -1,9 +1,8 @@
-package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Service;
+package com.Zipcode.Wilmington.Budget.Group2.BudgetServer.service;
 
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Account;
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Entity.Profile;
-import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.Repositories.ProfileRepo;
-import org.junit.Assert;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.models.Account;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.models.Profile;
+import com.Zipcode.Wilmington.Budget.Group2.BudgetServer.repositories.ProfileRepo;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
