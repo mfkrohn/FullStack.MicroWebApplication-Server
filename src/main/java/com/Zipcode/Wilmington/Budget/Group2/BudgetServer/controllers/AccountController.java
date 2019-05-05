@@ -43,7 +43,7 @@ public class AccountController {
     }
 
     @GetMapping("accounts/balanceHistory/{userId}")
-    public ResponseEntity<List> getAccountBalanceHistory(@PathVariable Integer userId){
+    public ResponseEntity<List<Double>> getAccountBalanceHistory(@PathVariable Integer userId){
         return new ResponseEntity<>(accountService.getAccountBalanceHistory(userId),HttpStatus.OK);
     }
 
