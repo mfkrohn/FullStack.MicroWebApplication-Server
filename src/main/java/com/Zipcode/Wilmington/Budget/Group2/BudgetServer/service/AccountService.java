@@ -71,9 +71,7 @@ public class AccountService {
                         .equals(accountRepo.findById(accountIdTo).get().getProfileID())){
             Account[] accounts = new Account[2];
         accounts[0] = withdraw(accountIdFrom,amount);
-        accounts[0].updateBalanceHistory();
         accounts[1] = deposit(accountIdTo,amount);
-        accounts[1].updateBalanceHistory();
         return accounts;
         }
         return null;
